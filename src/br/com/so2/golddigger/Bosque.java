@@ -13,14 +13,14 @@ public class Bosque {
     public static final String cacadorAzul = "Cacador azul";
     public static final String cacadorAmarelo = "Cacador amarelo";
 
-    private List<Pote> potes = new Vector<Pote>();
-    private List<Cacador> cacadores = new Vector<Cacador>();
-    private List<Cachorro> cachorrosEmJogo = new ArrayList<Cachorro>();
+    public static List<Pote> potes = new Vector<>();
+    private List<Cacador> cacadores = new Vector<>();
+    private List<Cachorro> cachorrosEmJogo = new ArrayList<>();
     private CachorroVermelho cachorroVemelho = new CachorroVermelho();
 
     public Bosque() {
 
-        for(int i = 1; i <= 20; i++) {
+        for(int i = 0; i < 20; i++) {
             potes.add(new Pote(i));
         }
 
@@ -39,23 +39,31 @@ public class Bosque {
         }
 
         try {
-            startJogo();
+            populaCampo();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
-    public void startJogo() throws InterruptedException {
+    private void populaCampo() throws InterruptedException {
         addCachorroNoJogo(cacadores.get(0).getCachorro1());
         addCachorroNoJogo(cacadores.get(1).getCachorro1());
         addCachorroNoJogo(cacadores.get(2).getCachorro1());
+        addCachorroNoJogo(cacadores.get(0).getCachorro2());
+        addCachorroNoJogo(cacadores.get(1).getCachorro2());
+        addCachorroNoJogo(cacadores.get(2).getCachorro2());
     }
 
-    public void addCachorroNoJogo(Cachorro cachorro) throws InterruptedException {
-        if (cachorrosEmJogo.size() > 2) {
-            this.wait();
-        } else {
-            cachorrosEmJogo.add(cachorro);
+    private void addCachorroNoJogo(Cachorro cachorro) throws InterruptedException {
+        while (cachorrosEmJogo.size() > 2) {
+            cachorrosEmJogo.wait();
         }
+        cachorrosEmJogo.add(cachorro);
+    }
+
+    public void startJogo() {
+        cachorrosEmJogo.get(0).run();
+        cachorrosEmJogo.get(1).run();
+        cachorrosEmJogo.get(2).run();
     }
 }

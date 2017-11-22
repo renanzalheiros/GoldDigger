@@ -52,5 +52,9 @@ public class Pote {
         potesDestinos.put(19, Arrays.asList(18, 20));
         potesDestinos.put(20, Arrays.asList(16, 19));
     }
+
+    public List<Integer> getPotesDestinos(Integer posicaoPote) {
+        return potesDestinos.get(posicaoPote);
+    }
 }
 
