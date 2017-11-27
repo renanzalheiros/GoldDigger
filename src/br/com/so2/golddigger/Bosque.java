@@ -13,15 +13,14 @@ public class Bosque {
     public static final String cacadorAzul = "Cacador azul";
     public static final String cacadorAmarelo = "Cacador amarelo";
 
-    public static List<Pote> potes = new Vector<>();
+    public static Pote[] potes = new Pote[20];
     private List<Cacador> cacadores = new Vector<>();
-    private List<Cachorro> cachorrosEmJogo = new ArrayList<>();
+    private List<Thread> cachorrosEmJogo = new ArrayList<>();
     private CachorroVermelho cachorroVemelho = new CachorroVermelho();
 
     public Bosque() {
-
         for(int i = 0; i < 20; i++) {
-            potes.add(new Pote(i));
+            potes[i] = new Pote(i);
         }
 
         for (int i = 1; i <=3; i++) {
@@ -43,6 +42,7 @@ public class Bosque {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        startJogo();
     }
 
     private void populaCampo() throws InterruptedException {
@@ -55,15 +55,15 @@ public class Bosque {
     }
 
     private void addCachorroNoJogo(Cachorro cachorro) throws InterruptedException {
-        while (cachorrosEmJogo.size() > 2) {
-            cachorrosEmJogo.wait();
+        while (cachorrosEmJogo.size() < 3) {
+            cachorrosEmJogo.add(new Thread(cachorro));
         }
-        cachorrosEmJogo.add(cachorro);
+//            cachorrosEmJogo.wait();
     }
 
-    public void startJogo() {
-        cachorrosEmJogo.get(0).run();
-        cachorrosEmJogo.get(1).run();
-        cachorrosEmJogo.get(2).run();
+    private void startJogo() {
+        cachorrosEmJogo.get(0).start();
+        cachorrosEmJogo.get(1).start();
+        cachorrosEmJogo.get(2).start();
     }
 }
