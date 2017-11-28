@@ -22,7 +22,7 @@ public class Pote {
         return posicao;
     }
 
-    public int getMoedas() {
+    public synchronized int getMoedas() {
         return moedas;
     }
 
@@ -56,6 +56,10 @@ public class Pote {
     public List<Integer> getPotesDestinos(Integer posicaoPote) {
         List<Integer> potes = potesDestinos.get(posicaoPote);
         return potes;
+    }
+
+    public void deixarMoeda() {
+        this.moedas += 1;
     }
 }
 
