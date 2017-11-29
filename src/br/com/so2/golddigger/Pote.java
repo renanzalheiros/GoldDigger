@@ -37,13 +37,13 @@ public class Pote {
         potesDestinos.put(3, Arrays.asList(2, 9, 10));
         potesDestinos.put(4, Arrays.asList(2, 6));
         potesDestinos.put(5, Arrays.asList(5, 7, 8));
-        potesDestinos.put(6, Arrays.asList(6));
-        potesDestinos.put(7, Arrays.asList(6));
+        potesDestinos.put(6, Collections.singletonList(6));
+        potesDestinos.put(7, Collections.singletonList(6));
         potesDestinos.put(8, Arrays.asList(3, 4, 15, 18));
         potesDestinos.put(9, Arrays.asList(4, 12));
         potesDestinos.put(10, Arrays.asList(12, 14, 17));
         potesDestinos.put(11, Arrays.asList(10, 11, 13));
-        potesDestinos.put(12, Arrays.asList(12));
+        potesDestinos.put(12, Collections.singletonList(12));
         potesDestinos.put(13, Arrays.asList(11, 16));
         potesDestinos.put(14, Arrays.asList(1, 9));
         potesDestinos.put(15, Arrays.asList(14, 17, 18, 20));
